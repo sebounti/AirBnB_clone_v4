@@ -1,28 +1,19 @@
-$(document).ready(function () {
-    // Initialisez une liste vide pour stocker les aménités cochées
-    let selectedAmenities = [];
-  
-    // Sélectionnez toutes les cases à cocher avec la classe "checkbox-amenities"
-    $('.checkbox-amenities').change(function () {
-      var amenityId = $(this).data('id');
-      var amenityName = $(this).data('name');
-  
-      if ($(this).is(':checked')) {
-        // Si la case à cocher est cochée, ajoutez l'aménité à la liste
-        selectedAmenities.push({ id: amenityId, name: amenityName });
-      } else {
-        // Si la case à cocher est décochée, retirez l'aménité de la liste
-        selectedAmenities = selectedAmenities.filter(function (amenity) {
-          return amenity.id !== amenityId;
-        });
-      }
-  
-      // Mettez à jour la balise h4 avec la liste des aménités cochées
-      var amenityList = selectedAmenities.map(function (amenity) {
-        return amenity.name;
-      }).join(', ');
-  
-      $('.amenities h4').text('Amenities: ' + amenityList);
-    });
+$('document').ready(function () {
+  // Créez un objet pour stocker les aménités sélectionnées
+  let amenities = {};
+
+// Gestionnaire d'événements pour les cases à cocher
+$('INPUT[type="checkbox"]').change(function () {
+    if ($(this).is(':checked')) {
+      // Si la case à cocher est cochée, ajoutez l'aménité à l'objet "amenities"
+      amenities[$(this).attr('data-id')] = $(this).attr('data-name');
+    } else {
+      // Si la case à cocher est décochée, supprimez l'aménité de l'objet "amenities"
+      delete amenities[$(this).attr('data-id')];
+    }
+
+    // Update le texte dans le <H4></H4> avec la liste des aménités sélectionnées
+    // Object.values pour obtenir les valeurs de l'objet "amenities"
+    $('.amenities H4').text(Object.values(amenities).join(', '));
   });
-  
+});
