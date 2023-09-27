@@ -1,9 +1,9 @@
 $('document').ready(function () {
   // Créez un objet pour stocker les aménités sélectionnées
-  let amenities = {};
+  const amenities = {};
 
-// Gestionnaire d'événements pour les cases à cocher
-$('INPUT[type="checkbox"]').change(function () {
+  // Gestionnaire d'événements pour les cases à cocher
+  $('INPUT[type="checkbox"]').change(function () {
     if ($(this).is(':checked')) {
       // Si la case à cocher est cochée, ajoutez l'aménité à l'objet "amenities"
       amenities[$(this).attr('data-id')] = $(this).attr('data-name');
